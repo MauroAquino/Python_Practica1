@@ -4,14 +4,13 @@ class conjuntos:
 
 	#Constructor, genera un diccionario vacio y un contador como atributos de instancia
 	def __init__(self):
-		self._conj = {}
-		self._cont = 0
+		self._conj = []
+		
 
 	#Constructor, genera un diccionario vacio y un contador como atributos de instancia
 	def __init__(self,*param):
 		
-		self._conj = {}
-		self._cont = 0
+		self._conj = []
 
 		for value in param:
 			self.agregar_valor(value)	
@@ -23,22 +22,20 @@ class conjuntos:
 	#Metodo que agrega un valor a la coleccion del diccionario validando que no sea repetida	
 	def agregar_valor(self,par):
 		
-		for key, value in self._conj.items():
+		for value in self._conj:
 			if value == par:
 				return
 			else:
 				continue
 		
-		self._conj[self._cont]=par
-
-		self._cont+=1
+		self._conj.append(par)
 
 	#Metodo que remueve el valor del diccionario
 	def remover_elemento(self,par):
 
-		for key, value in self._conj.items():
+		for value in self._conj:
 			if value == par:
-				del self._conj[key]
+				self._conj.remove(value)
 				return
 			else:
 				continue	
@@ -50,9 +47,9 @@ class conjuntos:
 		dic_retorno = conjuntos()
 		validacion = 1
 
-		for key, value in seta._conj.items():
+		for value in seta._conj:
 			validacion = 1
-			for key_dos, value_dos in setb._conj.items():
+			for value_dos in setb._conj:
 				if value == value_dos:
 					validacion=0			
 			if validacion == 0:
@@ -69,8 +66,8 @@ class conjuntos:
 		
 		dic_retorno = conjuntos()
 
-		for key, value in seta._conj.items():
-			for key_dos, value_dos in setb._conj.items():
+		for value in seta._conj:
+			for value_dos in setb._conj:
 				if value == value_dos:
 					dic_retorno.agregar_valor(value)										
 		return dic_retorno		
@@ -83,9 +80,9 @@ class conjuntos:
 		contador=0
 		validacion=1
 
-		for key, value in seta._conj.items():
+		for value in seta._conj:
 			validacion = 1
-			for key_dos, value_dos in setb._conj.items():
+			for value_dos in setb._conj:
 				if value == value_dos:
 					validacion=0				
 			if validacion == 1:
@@ -104,12 +101,50 @@ class conjuntos:
 		
 		dic_retorno = conjuntos()
 
-		for key, value in seta._conj.items():
-			for key_dos, value_dos in setb._conj.items():
+		for value in seta._conj:
+			for key_dos, value_dos in setb._conj:
 				dic_retorno.agregar_valor(value_dos)
 			dic_retorno.agregar_valor(value)	
 
 		return dic_retorno	 	
+
+	#Metodo de clase que crea un tercer conjunto solo con los exclusivos	
+	@classmethod			
+	def diferencia_simetrica_conjuntos(cls,seta,setb):
+		
+		dic_retorno = conjuntos()
+		validacion = 1
+
+		for value in seta._conj:
+			validacion = 1
+			for value_dos in setb._conj:
+				if value == value_dos:
+					validacion=0			
+			if validacion == 0:
+				continue
+			else:
+				dic_retorno.agregar_valor(value)
+
+		for value in setb._conj:
+			validacion = 1
+			for value_dos in seta._conj:
+				if value == value_dos:
+					validacion=0			
+			if validacion == 0:
+				continue
+			else:
+				dic_retorno.agregar_valor(value)		
+
+
+		return dic_retorno	
+
+	#Metodo de clase que crea un tercer conjunto potencia	 	
+	@classmethod			
+	def conjunto_potencia(cls,seta):
+
+		n = len(seta)
+
+		print(n)
 
 class matriz:
 
