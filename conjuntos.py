@@ -111,6 +111,88 @@ class conjuntos:
 
 		return dic_retorno	 	
 
+class matriz:
+
+	def __init__(self,f,c,*args):
+		
+		j=0
+
+
+		self._list = [[0]*c for x in range(f)]
+
+		if len(args)==f*c:
+			
+			for x in range(f):
+				for y in range(c):
+					self._list[x][y] = args[j]
+					j+=1 
+	
+	@classmethod
+	def suma_matrices(cls,m1,m2):
+
+		if len(m1._list) == len(m2._list) and len(m1._list[0]) == len(m1._list[0]):
+
+			m3 = matriz(len(m2._list),len(m2._list[0]))
+
+			for x in range(len(m2._list)):
+				for y in range(len(m2._list[0])):
+					m3._list[x][y] = m1._list[x][y]+m2._list[x][y]
+
+		return m3
+
+	@classmethod
+	def resta_matrices(cls,m1,m2):
+
+		if len(m1._list) == len(m2._list) and len(m1._list[0]) == len(m1._list[0]):
+
+			m3 = matriz(len(m2._list),len(m2._list[0]))
+
+			for x in range(len(m2._list)):
+				for y in range(len(m2._list[0])):
+					m3._list[x][y] = m1._list[x][y]-m2._list[x][y]
+
+		return m3							
+
+	@classmethod
+	def multiplicar_escalar(cls,m1,esc):
+
+		m3 = matriz(len(m1._list),len(m1._list[0]))
+
+		for x in range(len(m1._list)):
+			for y in range(len(m1._list[0])):
+				m3._list[x][y] = esc*m1._list[x][y]
+
+		return m3
+
+	@classmethod
+	def multiplicar_matrices(cls,m1,m2):
+
+		result = 0
+
+		if(len(m1._list)==len(m2._list[0])):
+			m3 = matriz(len(m1._list),len(m2._list[0]))
+
+			for x in range(len(m1._list)):
+				for j in range(len(m2._list[0])):
+					for y in range(len(m1._list[0])):
+						m3._list[x][j] += (m1._list[x][y]*m2._list[y][j])
+				
+
+		return m3	
+
+	@classmethod
+	def trasponer_matrices(cls,m1):
+
+		m3 = matriz(len(m1._list[0]),len(m1._list))
+
+		for x in range(len(m1._list)):
+			for y in range(len(m1._list[0])):
+					m3._list[y][x] = m1._list[x][y]
+
+		return m3	
+	
+			
+
 
 
 
