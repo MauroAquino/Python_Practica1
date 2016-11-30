@@ -117,15 +117,25 @@ class matriz:
 		
 		j=0
 
-
-		self._list = [[0]*c for x in range(f)]
+		matriz = list(args)
 
 		if len(args)==f*c:
 			
+			self._list = [[0]*c for x in range(f)]
+
 			for x in range(f):
 				for y in range(c):
 					self._list[x][y] = args[j]
 					j+=1 
+		elif len(matriz) != 0:
+			
+			self._list = []
+
+			for x in range(len(matriz)): 
+				self._list.append(matriz[x])
+		else:
+			
+			self._list = [[0]*c for x in range(f)]					
 	
 	@classmethod
 	def suma_matrices(cls,m1,m2):
@@ -190,7 +200,52 @@ class matriz:
 					m3._list[y][x] = m1._list[x][y]
 
 		return m3	
+
+	def retornar_filas(self,*args):
+		
+		set_args=set(args)
+
+
+		for x in range(len(set_args)):
+			print(str(self._list[args[x]]))
+
+	def retornar_columnas(self,*args):
+		
+		string = "["
+
+		valor = list(set(args))
+
+		for y in range(len(valor)):
+			for x in range(len(self._list)):
+				
+				if x>0:
+					string=string+","
+				
+				string=string + str(self._list[x][valor[y]])
+
+			string = string + "]"
+		
+			if y != len(valor)-1:
+				string = string + ",["	
+					
+		print(string)	
 	
+	def mostrar_matriz(self):
+
+		for x in range(len(self._list)):
+				print(self._list[x])	
+	
+	def extracto_matriz(self,ref,f,c):
+
+		m3 = matriz(f,c)
+
+		if ref+c < len(m3._list):
+			for x in range(f):
+				for y in range(c):
+					m3._list[x][y] = self._list[x][ref+y]
+
+		return m3
+
 			
 
 
