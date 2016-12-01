@@ -99,14 +99,10 @@ class conjuntos:
 	@classmethod			
 	def producto_cartesiano(cls,seta,setb):
 		
-		dic_retorno = conjuntos()
+		import itertools
+		for i in itertools.product(seta._conj,setb._conj): 
+			print (i)
 
-		for value in seta._conj:
-			for key_dos, value_dos in setb._conj:
-				dic_retorno.agregar_valor(value_dos)
-			dic_retorno.agregar_valor(value)	
-
-		return dic_retorno	 	
 
 	#Metodo de clase que crea un tercer conjunto solo con los exclusivos	
 	@classmethod			
@@ -138,13 +134,14 @@ class conjuntos:
 
 		return dic_retorno	
 
-	#Metodo de clase que crea un tercer conjunto potencia	 	
-	@classmethod			
-	def conjunto_potencia(cls,seta):
+	#Metodo de clase que crea un tercer conjunto potencia	 
+	def conjunto_potencia(self):
+		
+		n = len(self._conj)
+		for x in range(1 << n):
+			print([self._conj[y] for y in range(n) if (x & (1 << y))])
 
-		n = len(seta)
-
-		print(n)
+	          
 
 class matriz:
 
